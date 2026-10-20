@@ -21,54 +21,30 @@
     display: block;
 }
 
-.welcome-container, .game-setup-container {
+.welcome-container, .game-setup-container, .ludo-gameplay {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(12px);
-    padding: 25px;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
     border: 1px solid rgba(255,255,255,0.1);
 }
 
-.welcome-tag {
-    font-size: 1.1rem;
-    color: #e4e4e4;
-    margin-bottom: 15px;
-}
+.welcome-tag { font-size: 1.1rem; color: #e4e4e4; margin-bottom: 15px; }
 
 .vol-btn {
-    background: #e94560;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 20px;
+    background: #e94560; color: white; border: none; padding: 8px 15px;
+    border-radius: 20px; font-weight: bold; cursor: pointer; margin-bottom: 20px;
 }
 
 .input-group input {
-    width: 85%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    text-align: center;
-    outline: none;
-    background: #fff;
-    color: #333;
+    width: 85%; padding: 12px; border: none; border-radius: 10px;
+    font-size: 1rem; text-align: center; background: #fff; color: #333;
 }
 
 .btn {
-    width: 90%;
-    padding: 14px;
-    margin: 8px 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
+    width: 90%; padding: 14px; margin: 8px 0; font-size: 1.1rem;
+    font-weight: bold; border: none; border-radius: 12px; cursor: pointer; transition: 0.2s;
 }
 
 .btn-ludo { background-color: #ff4757; color: white; }
@@ -77,30 +53,50 @@
 .btn-back { background-color: #3282b8; color: white; margin-top: 25px; }
 
 .players-section {
-    margin-top: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    border-radius: 12px;
-    display: none; /* शुरू में बंद रहेगा */
+    margin-top: 20px; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 12px; display: none;
 }
 
-.player-options {
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-}
+.player-options { display: flex; justify-content: space-around; gap: 10px; }
 
 .btn-player {
-    flex: 1;
-    padding: 12px 5px;
-    font-weight: bold;
-    background: #00b894;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    flex: 1; padding: 12px 5px; font-weight: bold; background: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer;
 }
 
-.btn:active, .btn-player:active, .vol-btn:active {
-    transform: scale(0.96);
+/* LUDO BOARD CSS DISPLAY */
+.gameplay-header {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
 }
+
+#ludo-turn-indicator { font-size: 1.2rem; font-weight: bold; background: #222; padding: 5px 15px; border-radius: 10px; }
+
+.btn-exit { background: #ff4757; color: white; border: none; padding: 5px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+.ludo-board {
+    width: 320px; height: 320px; background: white; margin: 0 auto;
+    display: grid; grid-template-columns: 6fr 3fr 6fr; grid-template-rows: 6fr 3fr 6fr;
+    border: 3px solid #333; border-radius: 8px; overflow: hidden;
+}
+
+.house { display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; font-size: 0.9rem; }
+.red-house { background: #ff4757; }
+.green-house { background: #2ed573; }
+.yellow-house { background: #ffa502; }
+.blue-house { background: #1e90ff; }
+.home-center { background: #f1f2f6; color: #333; display: flex; justify-content: center; align-items: center; font-size: 0.8rem; font-weight: bold; }
+.path { background: #dfe4ea; }
+
+/* DICE STYLING */
+.dice-container { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px; }
+
+.dice {
+    width: 50px; height: 50px; background: white; color: black; border-radius: 10px;
+    display: flex; justify-content: center; align-items: center; font-size: 1.8rem; font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); border: 2px solid #ccc;
+}
+
+.btn-roll {
+    background: #ffa502; color: white; border: none; padding: 12px 25px;
+    font-size: 1.1rem; font-weight: bold; border-radius: 10px; cursor: pointer;
+}
+
+.btn:active, .btn-player:active, .vol-btn:active, .btn-roll:active { transform: scale(0.96); }

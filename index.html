@@ -29,31 +29,56 @@
 
     <!-- PAGE 2: LUDO SCREEN -->
     <div id="page-2" class="page">
-        <div class="game-setup-container">
+        <!-- सेटअप स्क्रीन -->
+        <div id="ludo-setup" class="game-setup-container">
             <h2>🎲 Ludo Game Setup</h2>
             <p id="ludo-welcome-msg" class="welcome-tag"></p>
             
-            <!-- वॉल्यूम बटन -->
             <button id="ludo-vol-btn" class="vol-btn" onclick="toggleVolume('ludo')">🔊 Volume: ON</button>
 
-            <!-- मोड सिलेक्शन -->
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectLudoMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectLudoMode('friends')">👥 Play with Friends</button>
             </div>
 
-            <!-- फ्रेंड्स चुनने पर प्लेयर्स की संख्या (शुरुआत में छुपा रहेगा) -->
             <div id="ludo-players-section" class="players-section">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
-                    <button class="btn-player" onclick="setPlayers('ludo', 2)">2 Players</button>
-                    <button class="btn-player" onclick="setPlayers('ludo', 3)">3 Players</button>
-                    <button class="btn-player" onclick="setPlayers('ludo', 4)">4 Players</button>
+                    <button class="btn-player" onclick="startLudoGameplay(2)">2 Players</button>
+                    <button class="btn-player" onclick="startLudoGameplay(3)">3 Players</button>
+                    <button class="btn-player" onclick="startLudoGameplay(4)">4 Players</button>
                 </div>
             </div>
 
             <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        </div>
+
+        <!-- असली लूडो गेमप्ले स्क्रीन (शुरू में छुपी रहेगी) -->
+        <div id="ludo-gameplay" class="ludo-gameplay" style="display: none;">
+            <div class="gameplay-header">
+                <span id="ludo-turn-indicator">🔴 Red Turn</span>
+                <button class="btn-exit" onclick="exitLudoGameplay()">❌ Exit</button>
+            </div>
+            
+            <!-- लूडo का सुंदर CSS बोर्ड -->
+            <div class="ludo-board">
+                <div class="house red-house"><span>RED</span></div>
+                <div class="path top-path"></div>
+                <div class="house green-house"><span>GREEN</span></div>
+                <div class="path left-path"></div>
+                <div class="home-center"><span>HOME</span></div>
+                <div class="path right-path"></div>
+                <div class="house yellow-house"><span>YELLOW</span></div>
+                <div class="path bottom-path"></div>
+                <div class="house blue-house"><span>BLUE</span></div>
+            </div>
+
+            <!-- पासा (Dice) फेंकने का एरिया -->
+            <div class="dice-container">
+                <div id="ludo-dice" class="dice">1</div>
+                <button class="btn-roll" onclick="rollLudoDice()">🎲 Roll Dice</button>
+            </div>
         </div>
     </div>
 
@@ -63,17 +88,14 @@
             <h2>⚪ Carrom Game Setup</h2>
             <p id="carrom-welcome-msg" class="welcome-tag"></p>
             
-            <!-- वॉल्यूम बटन -->
             <button id="carrom-vol-btn" class="vol-btn" onclick="toggleVolume('carrom')">🔊 Volume: ON</button>
 
-            <!-- मोड सिलेक्शन -->
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectCarromMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectCarromMode('friends')">👥 Play with Friends</button>
             </div>
 
-            <!-- फ्रेंड्स चुनने पर प्लेयर्स की संख्या -->
             <div id="carrom-players-section" class="players-section">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
