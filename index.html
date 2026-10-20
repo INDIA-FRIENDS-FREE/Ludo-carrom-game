@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -27,18 +27,64 @@
         </div>
     </div>
 
-    <!-- PAGE 2: LUDO SCREEN (अभी के लिए खाली ढांचा, अगले स्टेप में कोड भरेंगे) -->
+    <!-- PAGE 2: LUDO SCREEN -->
     <div id="page-2" class="page">
-        <h2>🎲 Ludo Game Setup</h2>
-        <p id="ludo-welcome-msg"></p>
-        <button class="btn" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        <div class="game-setup-container">
+            <h2>🎲 Ludo Game Setup</h2>
+            <p id="ludo-welcome-msg" class="welcome-tag"></p>
+            
+            <!-- वॉल्यूम बटन -->
+            <button id="ludo-vol-btn" class="vol-btn" onclick="toggleVolume('ludo')">🔊 Volume: ON</button>
+
+            <!-- मोड सिलेक्शन -->
+            <div class="mode-selection">
+                <h3>खेलने का तरीका चुनें:</h3>
+                <button class="btn btn-mode" onclick="selectLudoMode('computer')">🤖 Computer vs Me</button>
+                <button class="btn btn-mode" onclick="selectLudoMode('friends')">👥 Play with Friends</button>
+            </div>
+
+            <!-- फ्रेंड्स चुनने पर प्लेयर्स की संख्या (शुरुआत में छुपा रहेगा) -->
+            <div id="ludo-players-section" class="players-section">
+                <h3>कितने लोग खेलेंगे?</h3>
+                <div class="player-options">
+                    <button class="btn-player" onclick="setPlayers('ludo', 2)">2 Players</button>
+                    <button class="btn-player" onclick="setPlayers('ludo', 3)">3 Players</button>
+                    <button class="btn-player" onclick="setPlayers('ludo', 4)">4 Players</button>
+                </div>
+            </div>
+
+            <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        </div>
     </div>
 
-    <!-- PAGE 3: CARROM SCREEN (अभी के लिए खाली ढांचा) -->
+    <!-- PAGE 3: CARROM SCREEN -->
     <div id="page-3" class="page">
-        <h2>⚪ Carrom Game Setup</h2>
-        <p id="carrom-welcome-msg"></p>
-        <button class="btn" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        <div class="game-setup-container">
+            <h2>⚪ Carrom Game Setup</h2>
+            <p id="carrom-welcome-msg" class="welcome-tag"></p>
+            
+            <!-- वॉल्यूम बटन -->
+            <button id="carrom-vol-btn" class="vol-btn" onclick="toggleVolume('carrom')">🔊 Volume: ON</button>
+
+            <!-- मोड सिलेक्शन -->
+            <div class="mode-selection">
+                <h3>खेलने का तरीका चुनें:</h3>
+                <button class="btn btn-mode" onclick="selectCarromMode('computer')">🤖 Computer vs Me</button>
+                <button class="btn btn-mode" onclick="selectCarromMode('friends')">👥 Play with Friends</button>
+            </div>
+
+            <!-- फ्रेंड्स चुनने पर प्लेयर्स की संख्या -->
+            <div id="carrom-players-section" class="players-section">
+                <h3>कितने लोग खेलेंगे?</h3>
+                <div class="player-options">
+                    <button class="btn-player" onclick="setPlayers('carrom', 2)">2 Players</button>
+                    <button class="btn-player" onclick="setPlayers('carrom', 3)">3 Players</button>
+                    <button class="btn-player" onclick="setPlayers('carrom', 4)">4 Players</button>
+                </div>
+            </div>
+
+            <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
