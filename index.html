@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ludo & Carrom Multi-Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- PAGE 1: WELCOME SCREEN -->
+    <div id="page-1" class="page active">
+        <div class="welcome-container">
+            <h1>Welcome to the Game! 🎮</h1>
+            <p>लूडो और कैरम की दुनिया में आपका स्वागत है</p>
+            
+            <div class="input-group">
+                <label for="username">अपना सुंदर सा नाम लिखिए:</label>
+                <input type="text" id="username" placeholder="यहाँ नाम डालें (जैसे: Rahul)...">
+            </div>
+
+            <div class="game-choice">
+                <h3>आप क्या खेलना चाहते हैं?</h3>
+                <button class="btn btn-ludo" onclick="goToLudoPage()">🎲 लूडो (Ludo)</button>
+                <button class="btn btn-carrom" onclick="goToCarromPage()">⚪ कैरम (Carrom)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAGE 2: LUDO SCREEN (अभी के लिए खाली ढांचा, अगले स्टेप में कोड भरेंगे) -->
+    <div id="page-2" class="page">
+        <h2>🎲 Ludo Game Setup</h2>
+        <p id="ludo-welcome-msg"></p>
+        <button class="btn" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+    </div>
+
+    <!-- PAGE 3: CARROM SCREEN (अभी के लिए खाली ढांचा) -->
+    <div id="page-3" class="page">
+        <h2>⚪ Carrom Game Setup</h2>
+        <p id="carrom-welcome-msg"></p>
+        <button class="btn" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

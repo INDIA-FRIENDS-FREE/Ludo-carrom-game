@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page {
+    display: none; /* शुरुआत में सारे पेज छुपे रहेंगे */
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.page.active {
+    display: block; /* सिर्फ एक्टिव पेज दिखाई देगा */
+}
+
+.welcome-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.input-group {
+    margin: 25px 0;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+input {
+    width: 80%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+}
+
+.game-choice {
+    margin-top: 30px;
+}
+
+.btn {
+    width: 85%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-ludo { background-color: #e74c3c; color: white; }
+.btn-carrom { background-color: #f1c40f; color: #2c3e50; }
+
+.btn:active {
+    transform: scale(0.95);
+}
