@@ -82,14 +82,11 @@
             <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
         </div>
 
-        <!-- असली कैरम गेमप्ले स्क्रीन -->
         <div id="carrom-gameplay" class="carrom-gameplay" style="display: none;">
             <div class="gameplay-header">
                 <span id="carrom-turn-indicator">⚪ White Turn</span>
                 <button class="btn-exit" onclick="exitCarromGameplay()">❌ Exit</button>
             </div>
-            
-            <!-- लकड़ी जैसा दिखने वाला असली कैरम बोर्ड -->
             <div class="carrom-board" id="carrom-board">
                 <div class="pocket top-left"></div>
                 <div class="pocket top-right"></div>
@@ -98,10 +95,7 @@
                 <div class="center-circle">
                     <div class="queen-coin"></div>
                 </div>
-                <!-- गोटियाँ और स्ट्राइकर कोड से अंदर आ जाएंगे -->
             </div>
-
-            <!-- स्ट्राइकर को कंट्रोल करने का स्लाइडर बार -->
             <div class="carrom-controls">
                 <label for="striker-range">स्ट्राइकर खिसकाएं:</label>
                 <input type="range" id="striker-range" min="50" max="290" value="170" oninput="moveStriker(this.value)">
