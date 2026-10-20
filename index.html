@@ -15,12 +15,12 @@
             <p>लूडो और कैरम की दुनिया में आपका स्वागत है</p>
             <div class="input-group">
                 <label for="username">अपना सुंदर सा नाम लिखिए:</label>
-                <input type="text" id="username" placeholder="यहाँ नाम डालें (जैसे: Rahul)...">
+                <input type="text" id="username" placeholder="यहाँ नाम डालें...">
             </div>
             <div class="game-choice">
                 <h3>आप क्या खेलना चाहते हैं?</h3>
-                <button class="btn btn-ludo" onclick="goToLudoPage()">🎲 लूडो (Ludo)</button>
-                <button class="btn btn-carrom" onclick="goToCarromPage()">⚪ कैरम (Carrom)</button>
+                <button class="btn btn-ludo" onclick="openLudo()">🎲 लूडो (Ludo)</button>
+                <button class="btn btn-carrom" onclick="openCarrom()">⚪ कैरम (Carrom)</button>
             </div>
         </div>
     </div>
@@ -29,34 +29,39 @@
     <div id="page-2" class="page">
         <div id="ludo-setup" class="game-setup-container">
             <h2>🎲 Ludo Game Setup</h2>
-            <p id="ludo-welcome-msg" class="welcome-tag"></p>
+            <p id="ludo-user" class="welcome-tag"></p>
             <button id="ludo-vol-btn" class="vol-btn" onclick="toggleVolume('ludo')">🔊 Volume: ON</button>
+            
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectLudoMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectLudoMode('friends')">👥 Play with Friends</button>
             </div>
+
             <div id="ludo-players-section" class="players-section" style="display: none;">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
-                    <button class="btn-player" onclick="startLudoGameplay(2)">2 Players</button>
-                    <button class="btn-player" onclick="startLudoGameplay(3)">3 Players</button>
-                    <button class="btn-player" onclick="startLudoGameplay(4)">4 Players</button>
+                    <button class="btn-player" onclick="startLudoGame(2)">2 Players</button>
+                    <button class="btn-player" onclick="startLudoGame(3)">3 Players</button>
+                    <button class="btn-player" onclick="startLudoGame(4)">4 Players</button>
                 </div>
             </div>
-            <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+            <br><br>
+            <button class="btn btn-back" onclick="backHome()">⬅ पीछे जाएँ</button>
         </div>
 
-        <div id="ludo-gameplay" class="ludo-gameplay" style="display: none;">
-            <div class="gameplay-header">
-                <span id="ludo-turn-indicator">🔴 Red Turn</span>
-                <button class="btn-exit" onclick="exitLudoGameplay()">❌ Exit</button>
+        <!-- लूडो असली गेमप्ले -->
+        <div id="ludo-gameplay" style="display: none;">
+            <h2 id="ludo-turn">🔴 Red Turn</h2>
+            <div class="gameplay-box">
+                <div class="board-image-container">
+                    <img src="ludo.jpg" alt="Ludo Board">
+                </div>
+                <div id="dice-num" class="dice-view">1</div>
+                <button class="btn-roll" onclick="rollDice()">🎲 पासा फेंकें (Roll)</button>
             </div>
-            <div class="ludo-board-grid" id="ludo-board"></div>
-            <div class="dice-container">
-                <div id="ludo-dice" class="dice">1</div>
-                <button id="roll-btn" class="btn-roll" onclick="rollLudoDice()">🎲 Roll Dice</button>
-            </div>
+            <br>
+            <button class="btn btn-back" onclick="exitLudo()">❌ खेल बंद करें</button>
         </div>
     </div>
 
@@ -64,75 +69,70 @@
     <div id="page-3" class="page">
         <div id="carrom-setup" class="game-setup-container">
             <h2>⚪ Carrom Game Setup</h2>
-            <p id="carrom-welcome-msg" class="welcome-tag"></p>
+            <p id="carrom-user" class="welcome-tag"></p>
             <button id="carrom-vol-btn" class="vol-btn" onclick="toggleVolume('carrom')">🔊 Volume: ON</button>
+            
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectCarromMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectCarromMode('friends')">👥 Play with Friends</button>
             </div>
+
             <div id="carrom-players-section" class="players-section" style="display: none;">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
-                    <button class="btn-player" onclick="startCarromGameplay(2)">2 Players</button>
-                    <button class="btn-player" onclick="startCarromGameplay(3)">3 Players</button>
-                    <button class="btn-player" onclick="startCarromGameplay(4)">4 Players</button>
+                    <button class="btn-player" onclick="startCarromGame(2)">2 Players</button>
+                    <button class="btn-player" onclick="startCarromGame(3)">3 Players</button>
+                    <button class="btn-player" onclick="startCarromGame(4)">4 Players</button>
                 </div>
             </div>
-            <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+            <br><br>
+            <button class="btn btn-back" onclick="backHome()">⬅ पीछे जाएँ</button>
         </div>
 
-        <div id="carrom-gameplay" class="carrom-gameplay" style="display: none;">
-            <div class="gameplay-header">
-                <span id="carrom-turn-indicator">⚪ White Turn</span>
-                <button class="btn-exit" onclick="exitCarromGameplay()">❌ Exit</button>
-            </div>
-            <div class="carrom-board" id="carrom-board">
-                <div class="pocket top-left"></div>
-                <div class="pocket top-right"></div>
-                <div class="pocket bottom-left"></div>
-                <div class="pocket bottom-right"></div>
-                <div class="center-circle">
-                    <div class="queen-coin"></div>
+        <!-- कैरम असली गेमप्ले -->
+        <div id="carrom-gameplay" style="display: none;">
+            <h2 id="carrom-turn-indicator">⚪ White Turn</h2>
+            <div class="gameplay-box">
+                <div class="board-image-container">
+                    <img src="carrom.jpg" alt="Carrom Board">
+                </div>
+                <div class="carrom-controls">
+                    <label for="striker-slider">Striker Position:</label><br>
+                    <input type="range" id="striker-slider" min="1" max="100" value="50">
+                    <button class="btn-shoot" onclick="shootStriker()">🎯 स्ट्राइकर मारें (HIT)</button>
                 </div>
             </div>
-            <div class="carrom-controls">
-                <label for="striker-range">स्ट्राइकर खिसकाएं:</label>
-                <input type="range" id="striker-range" min="50" max="290" value="170" oninput="moveStriker(this.value)">
-                <button class="btn-shoot" onclick="shootStriker()">🎯 HIT</button>
-            </div>
+            <br>
+            <button class="btn btn-back" onclick="exitCarrom()">❌ खेल बंद करें</button>
         </div>
     </div>
 
     <script>
-        let ludoTurns = ["🔴 Red Turn", "🟢 Green Turn", "🟡 Yellow Turn", "🔵 Blue Turn"];
-        let ludoColors = ["red", "green", "yellow", "blue"];
-        let currentTurnIndex = 0; 
-        let totalActivePlayers = 2;
-        let hasRolled = false;
-        let tokenPositions = { red: 0, green: 0 };
+        var turns = ["🔴 Red Turn", "🟢 Green Turn", "🟡 Yellow Turn", "🔵 Blue Turn"];
+        var carromTurns = ["⚪ White Turn", "⚫ Black Turn"];
+        var currentTurn = 0;
+        var carromTurn = 0;
+        var activePlayers = 2;
+        var activeCarromPlayers = 2;
 
-        function goToLudoPage() {
-            let name = document.getElementById("username").value || "खिलाड़ी";
+        function openLudo() {
+            var name = document.getElementById("username").value || "खिलाड़ी";
             document.getElementById("page-1").classList.remove("active");
             document.getElementById("page-2").classList.add("active");
-            document.getElementById("ludo-welcome-msg").innerText = "चलो खेलते हैं, " + name + "!";
-            document.getElementById("ludo-setup").style.display = "block";
-            document.getElementById("ludo-gameplay").style.display = "none";
-            document.getElementById("ludo-players-section").style.display = "none";
+            document.getElementById("ludo-user").innerText = "चलो खेलते हैं, " + name + "!";
+            exitLudo();
         }
 
-        function goToCarromPage() {
-            let name = document.getElementById("username").value || "खिलाड़ी";
+        function openCarrom() {
+            var name = document.getElementById("username").value || "खिलाड़ी";
             document.getElementById("page-1").classList.remove("active");
             document.getElementById("page-3").classList.add("active");
-            document.getElementById("carrom-welcome-msg").innerText = "चलो खेलते हैं, " + name + "!";
-            document.getElementById("carrom-setup").style.display = "block";
-            document.getElementById("carrom-gameplay").style.display = "none";
-            document.getElementById("carrom-players-section").style.display = "none";
+            document.getElementById("carrom-user").innerText = "चलो खेलते हैं, " + name + "!";
+            exitCarrom();
         }
 
-        function backToHome() {
+        function backHome() {
             document.getElementById("page-2").classList.remove("active");
             document.getElementById("page-3").classList.remove("active");
             document.getElementById("page-1").classList.add("active");
@@ -141,50 +141,73 @@
         function selectLudoMode(mode) {
             if(mode === 'friends') {
                 document.getElementById("ludo-players-section").style.display = "block";
-            } else { 
-                alert("🤖 कंप्यूटर मोड चुना गया!");
-                startLudoGameplay(2); 
+            } else {
+                document.getElementById("ludo-players-section").style.display = "none";
+                startLudoGame(2);
             }
         }
 
         function selectCarromMode(mode) {
             if(mode === 'friends') {
                 document.getElementById("carrom-players-section").style.display = "block";
-            } else { 
-                alert("🤖 कंप्यूटर मोड चुना गया!");
-                startCarromGameplay(2);
+            } else {
+                document.getElementById("carrom-players-section").style.display = "none";
+                startCarromGame(2);
             }
         }
 
-        function generateLudoBoard() {
-            const board = document.getElementById("ludo-board"); 
-            board.innerHTML = "";
-            for (let r = 0; r < 15; r++) {
-                for (let c = 0; c < 15; c++) {
-                    if (r < 6 && c < 6) { if (r === 0 && c === 0) board.innerHTML += '<div class="home-box bg-red" style="grid-area: 1/1/7/7">RED</div>'; continue; }
-                    if (r < 6 && c > 8) { if (r === 0 && c === 9) board.innerHTML += '<div class="home-box bg-green" style="grid-area: 1/10/7/16">GREEN</div>'; continue; }
-                    if (r > 8 && c < 6) { if (r === 9 && c === 0) board.innerHTML += '<div class="home-box bg-blue" style="grid-area: 10/1/16/7">BLUE</div>'; continue; }
-                    if (r > 8 && c > 8) { if (r === 9 && c === 9) board.innerHTML += '<div class="home-box bg-yellow" style="grid-area: 10/10/16/16">YELLOW</div>'; continue; }
-                    if (r >= 6 && r <= 8 && c >= 6 && c <= 8) { if (r === 6 && c === 6) board.innerHTML += '<div class="home-box bg-center" style="grid-area: 7/7/10/10">HOME</div>'; continue; }
-
-                    let cell = document.createElement("div"); 
-                    cell.className = "cell"; 
-                    cell.id = `cell-${r}-${c}`;
-                    
-                    if (r === 6 && c === 1) cell.classList.add("bg-red");
-                    if (r === 1 && c === 8) cell.classList.add("bg-green");
-                    if (r === 8 && c === 13) cell.classList.add("bg-yellow");
-                    if (r === 13 && c === 6) cell.classList.add("bg-blue");
-                    if (r === 7 && c >= 1 && c <= 5) cell.classList.add("bg-red");
-                    if (c === 7 && r >= 1 && r <= 5) cell.classList.add("bg-green");
-                    if (r === 7 && c >= 9 && c <= 13) cell.classList.add("bg-yellow");
-                    if (c === 7 && r >= 9 && r <= 13) cell.classList.add("bg-blue");
-                    board.appendChild(cell);
-                }
-            }
-            renderTokens();
+        function startLudoGame(players) {
+            activePlayers = players;
+            currentTurn = 0;
+            document.getElementById("ludo-setup").style.display = "none";
+            document.getElementById("ludo-gameplay").style.display = "block";
+            document.getElementById("ludo-turn").innerText = turns[currentTurn];
+            document.getElementById("dice-num").innerText = "1";
         }
 
-        function renderTokens() {
-            document.querySelectorAll('.token').forEach(t => t.remove());
-            
+        function exitLudo() {
+            document.getElementById("ludo-gameplay").style.display = "none";
+            document.getElementById("ludo-setup").style.display = "block";
+            document.getElementById("ludo-players-section").style.display = "none";
+        }
+
+        function rollDice() {
+            var rand = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("dice-num").innerText = rand;
+            currentTurn = (currentTurn + 1) % activePlayers;
+            document.getElementById("ludo-turn").innerText = turns[currentTurn];
+        }
+
+        function startCarromGame(players) {
+            activeCarromPlayers = players;
+            carromTurn = 0;
+            document.getElementById("carrom-setup").style.display = "none";
+            document.getElementById("carrom-gameplay").style.display = "block";
+            document.getElementById("carrom-turn-indicator").innerText = carromTurns[carromTurn];
+        }
+
+        function exitCarrom() {
+            document.getElementById("carrom-gameplay").style.display = "none";
+            document.getElementById("carrom-setup").style.display = "block";
+            document.getElementById("carrom-players-section").style.display = "none";
+        }
+
+        function shootStriker() {
+            alert("🎯 स्ट्राइकर से शॉट लगा! गोटियाँ बिखर गईं।");
+            carromTurn = (carromTurn + 1) % activeCarromPlayers;
+            document.getElementById("carrom-turn-indicator").innerText = carromTurns[carromTurn];
+        }
+
+        function toggleVolume(game) {
+            var btn = document.getElementById(game + "-vol-btn");
+            if(btn.innerText.includes("ON")) {
+                btn.innerText = "🔇 Volume: OFF";
+                btn.style.background = "#555";
+            } else {
+                btn.innerText = "🔊 Volume: ON";
+                btn.style.background = "#e94560";
+            }
+        }
+    </script>
+</body>
+</html>

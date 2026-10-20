@@ -1,64 +1,35 @@
- body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1f4068 0%, #162447 100%);
-    color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh;
-}
-.page { display: none; width: 95%; max-width: 450px; text-align: center; }
+ body { font-family: sans-serif; background: #162447; color: white; text-align: center; padding-top: 30px; }
+.page { display: none; background: rgba(255,255,255,0.1); padding: 25px; max-width: 420px; margin: 0 auto; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
 .page.active { display: block; }
+button { width: 90%; padding: 14px; margin: 8px 0; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 10px; border: none; transition: 0.1s; }
+button:active { transform: scale(0.97); }
+input { width: 80%; padding: 12px; font-size: 16px; text-align: center; border-radius: 8px; border: none; margin-bottom: 20px; outline: none; }
+.btn-ludo { background: #ff4757; color: white; }
+.btn-carrom { background: #ffa502; color: white; }
+.btn-mode { background: #0f4c75; color: white; }
+.btn-back { background: #3282b8; color: white; }
+.vol-btn { background: #e94560; color: white; width: auto; padding: 8px 20px; border-radius: 20px; font-size: 14px; margin-bottom: 15px; }
+.players-section { margin-top: 15px; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 10px; }
+.player-options { display: flex; justify-content: space-around; gap: 8px; }
+.btn-player { flex: 1; padding: 12px 5px; font-weight: bold; background: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.gameplay-box { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-top: 15px; }
 
-.welcome-container, .game-setup-container, .ludo-gameplay, .carrom-gameplay {
-    background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
-    padding: 15px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+.board-image-container { 
+    width: 280px; 
+    height: 280px; 
+    margin: 0 auto 15px auto; 
+    border: 4px solid #333; 
+    border-radius: 8px; 
+    overflow: hidden;
+    background-color: #fff;
 }
-.welcome-tag { font-size: 1.1rem; color: #e4e4e4; margin-bottom: 15px; }
-.vol-btn { background: #e94560; color: white; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
-.input-group input { width: 85%; padding: 12px; border: none; border-radius: 10px; font-size: 1rem; text-align: center; background: #fff; color: #333; }
-
-.btn { width: 90%; padding: 12px; margin: 6px 0; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; transition: 0.2s; }
-.btn-ludo { background-color: #ff4757; color: white; }
-.btn-carrom { background-color: #ffa502; color: white; }
-.btn-mode { background-color: #0f4c75; color: white; }
-.btn-back { background-color: #3282b8; color: white; margin-top: 15px; }
-.players-section { margin-top: 15px; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 12px; }
-.player-options { display: flex; justify-content: space-around; gap: 10px; }
-.btn-player { flex: 1; padding: 12px 5px; font-weight: bold; background: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; }
-
-/* LUDO BOARD GRID */
-.gameplay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-#ludo-turn-indicator, #carrom-turn-indicator { font-size: 1.1rem; font-weight: bold; background: #222; padding: 5px 15px; border-radius: 10px; }
-.btn-exit { background: #ff4757; color: white; border: none; padding: 5px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-.ludo-board-grid { width: 340px; height: 340px; background: #fff; margin: 0 auto; display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr); border: 4px solid #222; border-radius: 8px; position: relative; }
-.cell { background: #fff; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; position: relative; width: 100%; height: 100%; box-sizing: border-box; }
-.home-box { display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; font-size: 1.1rem; }
-.bg-red { background-color: #ff4757 !important; }
-.bg-green { background-color: #2ed573 !important; }
-.bg-yellow { background-color: #ffa502 !important; }
-.bg-blue { background-color: #1e90ff !important; }
-.bg-center { background-color: #f1f2f6 !important; color: #333; font-size: 0.7rem; font-weight: bold; }
-
-/* TOKENS */
-.token { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; position: absolute; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
-.token-red { background-color: #b30000; }
-.token-green { background-color: #00802b; }
-
-.dice-container { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 15px; }
-.dice { width: 45px; height: 45px; background: white; color: black; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; font-weight: bold; border: 2px solid #ccc; }
-.btn-roll { background: #ffa502; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; font-weight: bold; border-radius: 10px; cursor: pointer; }
-
-/* CARROM BOARD */
-.carrom-board {
-    width: 340px; height: 340px; background-color: #fddca5; margin: 0 auto; border: 12px solid #5c3a21; border-radius: 10px; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+.board-image-container img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
 }
-.pocket { width: 28px; height: 28px; background: #111; border-radius: 50%; position: absolute; }
-.top-left { top: 5px; left: 5px; } .top-right { top: 5px; right: 5px; } .bottom-left { bottom: 5px; left: 5px; } .bottom-right { bottom: 5px; right: 5px; }
-.center-circle { width: 60px; height: 60px; border: 2px solid #5c3a21; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; }
-.carrom-coin { width: 14px; height: 14px; border-radius: 50%; position: absolute; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #fff; transition: all 0.3s ease; }
-.coin-white { background: #fff; border: 1px solid #ccc; }
-.coin-black { background: #222; border: 1px solid #000; }
-.queen-coin { width: 14px; height: 14px; background: #ff4757; border-radius: 50%; border: 1px solid #fff; }
-.striker { width: 22px; height: 22px; background: #1e90ff; border: 2px solid #fff; border-radius: 50%; position: absolute; bottom: 35px; left: 159px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: left 0.1s ease, bottom 0.4s ease; }
+
+.dice-view { font-size: 30px; background: white; color: black; width: 55px; height: 55px; margin: 15px auto; display: flex; justify-content: center; align-items: center; border-radius: 10px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+.btn-roll, .btn-shoot { background: #2ed573; color: white; }
 .carrom-controls { margin-top: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; }
-.carrom-controls input { width: 70%; margin: 10px 0; }
-.btn-shoot { background: #2ed573; color: white; border: none; padding: 8px 20px; font-weight: bold; border-radius: 8px; cursor: pointer; }
-.btn:active, .btn-roll:active, .btn-shoot:active { transform: scale(0.96); }
+.carrom-controls input { width: 80%; margin: 10px 0; }
