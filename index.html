@@ -54,24 +54,16 @@
             <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
         </div>
 
-        <!-- असली लूडो गेमप्ले स्क्रीन (शुरू में छुपी रहेगी) -->
+        <!-- असली लूडो गेमप्ले स्क्रीन -->
         <div id="ludo-gameplay" class="ludo-gameplay" style="display: none;">
             <div class="gameplay-header">
                 <span id="ludo-turn-indicator">🔴 Red Turn</span>
                 <button class="btn-exit" onclick="exitLudoGameplay()">❌ Exit</button>
             </div>
             
-            <!-- लूडo का सुंदर CSS बोर्ड -->
-            <div class="ludo-board">
-                <div class="house red-house"><span>RED</span></div>
-                <div class="path top-path"></div>
-                <div class="house green-house"><span>GREEN</span></div>
-                <div class="path left-path"></div>
-                <div class="home-center"><span>HOME</span></div>
-                <div class="path right-path"></div>
-                <div class="house yellow-house"><span>YELLOW</span></div>
-                <div class="path bottom-path"></div>
-                <div class="house blue-house"><span>BLUE</span></div>
+            <!-- 15x15 असली लूडो ग्रिड बोर्ड -->
+            <div class="ludo-board-grid" id="ludo-board">
+                <!-- JavaScript के ज़रिए 52 रास्ते के खाने और 4 घर अपने आप यहाँ बन जाएंगे -->
             </div>
 
             <!-- पासा (Dice) फेंकने का एरिया -->

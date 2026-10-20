@@ -1,7 +1,6 @@
  let isLudoVolumeOn = true;
 let isCarromVolumeOn = true;
 
-// लूडो खेलने की बारी संभालने के लिए
 let ludoTurns = ["🔴 Red Turn", "🟢 Green Turn", "🟡 Yellow Turn", "🔵 Blue Turn"];
 let currentTurnIndex = 0;
 let totalActivePlayers = 2;
@@ -39,7 +38,7 @@ function selectLudoMode(mode) {
     } else {
         playerSection.style.display = "none";
         alert("🤖 कंप्यूटर मोड चुना गया! 2 प्लेयर्स का गेमप्ले शुरू हो रहा है।");
-        startLudoGameplay(2); // कंप्यूटर के लिए भी डिफ़ॉल्ट 2 प्लेयर बोर्ड खोलते हैं
+        startLudoGameplay(2);
     }
 }
 
@@ -53,37 +52,107 @@ function selectCarromMode(mode) {
     }
 }
 
-// प्लेयर चुनने पर गेमप्ले स्क्रीन चालू करना
+// 🎲 15x15 असली लूडो बोर्ड बनाने का फंक्शन
+function generateLudoBoard() {
+    const board = document.getElementById("ludo-board");
+    board.innerHTML = ""; // पुराना साफ़ करें
+
+    // 15x15 की लूपिंग (Total 225 Blocks)
+    for (let r = 0; r < 15; r++) {
+        for (let c = 0; c < 15; c++) {
+            
+            // 1. बड़े घर (Houses)
+            if (r < 6 && c < 6) {
+                if (r === 0 && c === 0) board.innerHTML += `<div class="home-box bg-red" style="grid-area: 1/1/7/7">RED</div>`;
+                continue;
+            }
+            if (r < 6 && c > 8) {
+                if (r === 0 && c === 9) board.innerHTML += `<div class="home-box bg-green" style="grid-area: 1/10/7/16">GREEN</div>`;
+                continue;
+            }
+            if (r > 8 && c < 6) {
+                if (r === 9 && c === 0) board.innerHTML += `<div class="home-box bg-blue" style="grid-area: 10/1/16/7">BLUE</div>`;
+                continue;
+            }
+            if (r > 8 && c > 8) {
+                if (r === 9 && c === 9) board.innerHTML += `<div class="home-box bg-yellow" style="grid-area: 10/10/16/16">YELLOW</div>`;
+                continue;
+            }
+
+            // 2. सेंटर का होम (Center Home Square)
+            if (r >= 6 && r <= 8 && c >= 6 && c <= 8) {
+                if (r === 6 && c === 6) board.innerHTML += `<div class="home-box bg-center" style="grid-area: 7/7/10/10">HOME</div>`;
+                continue;
+            }
+
+            // 3. रास्ते के डिब्बे (Path Cells)
+            let cell = document.createElement("div");
+            cell.className = "cell";
+            cell.dataset.row = r;
+            cell.dataset.col = c;
+
+            // सुरक्षित स्थान (Safe Stars) और रंगीन रास्ते
+            if (r === 6 && c === 1) cell.classList.add("bg-red"); // Red का स्टार्टिंग
+            if (r === 1 && c === 8) cell.classList.add("bg-green"); // Green का स्टार्टिंग
+            if (r === 8 && c === 13) cell.classList.add("bg-yellow"); // Yellow का स्टार्टिंग
+            if (r === 13 && c === 6) cell.classList.add("bg-blue"); // Blue का स्टार्टिंग
+
+            // होम पाथ (Home Paths)
+            if (r === 7 && c >= 1 && c <= 5) cell.classList.add("bg-red");
+            if (c === 7 && r >= 1 && r <= 5) cell.classList.add("bg-green");
+            if (r === 7 && c >= 9 && c <= 13) cell.classList.add("bg-yellow");
+            if (c === 7 && r >= 9 && r <= 13) cell.classList.add("bg-blue");
+
+            // स्टार सेल्स (Safe Zones)
+            if ((r===6 && c===1) || (r===2 && c===6) || (r===1 && c===8) || (r===6 && c===12) || (r===8 && c===13) || (r===12 && c===8) || (r===13 && c===6) || (r===8 && c===2)) {
+                cell.classList.add("star-cell");
+            }
+
+            board.appendChild(cell);
+        }
+    }
+
+    // गोटियाँ जोड़ना (Tokens)
+    addTokensToHouses();
+}
+
+// घरों के अंदर गोटियाँ दिखाना
+function addTokensToHouses() {
+    // हम केवल रेड और ग्रीन की एक-एक टोकन टेस्ट के लिए बोर्ड पर रख रहे हैं
+    const startCellRed = document.querySelector('[data-row="6"][data-col="1"]');
+    if(startCellRed) startCellRed.innerHTML += `<div class="token token-red"></div>`;
+
+    const startCellGreen = document.querySelector('[data-row="1"][data-col="8"]');
+    if(startCellGreen) startCellGreen.innerHTML += `<div class="token token-green"></div>`;
+}
+
 function startLudoGameplay(playersCount) {
     totalActivePlayers = playersCount;
     currentTurnIndex = 0;
     
-    // सेटअप छुपाओ, गेमप्ले दिखाओ
     document.getElementById("ludo-setup").style.display = "none";
     document.getElementById("ludo-gameplay").style.display = "block";
     
-    // टर्न इंडिकेटर सेट करें
     document.getElementById("ludo-turn-indicator").innerText = ludoTurns[currentTurnIndex];
     document.getElementById("ludo-dice").innerText = "1";
+
+    // बोर्ड जनरेट करें
+    generateLudoBoard();
 }
 
-// गेम से बाहर आने के लिए
 function exitLudoGameplay() {
     document.getElementById("ludo-gameplay").style.display = "none";
     document.getElementById("ludo-setup").style.display = "block";
     document.getElementById("ludo-players-section").style.display = "none";
 }
 
-// 🎲 पासा (Dice Roll) करने का जादुई फंक्शन
 function rollLudoDice() {
     let diceEl = document.getElementById("ludo-dice");
     let turnEl = document.getElementById("ludo-turn-indicator");
     
-    // 1 से 6 के बीच रैंडम नंबर
     let randomNumber = Math.floor(Math.random() * 6) + 1;
     diceEl.innerText = randomNumber;
     
-    // पासा फेंकने के बाद बारी (Turn) बदलें
     currentTurnIndex = (currentTurnIndex + 1) % totalActivePlayers;
     turnEl.innerText = ludoTurns[currentTurnIndex];
 }
