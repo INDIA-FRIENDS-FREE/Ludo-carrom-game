@@ -2,60 +2,34 @@
     margin: 0; padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1f4068 0%, #162447 100%);
-    color: #fff;
-    display: flex; justify-content: center; align-items: center; height: 100vh;
+    color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh;
 }
-
 .page { display: none; width: 95%; max-width: 450px; text-align: center; }
 .page.active { display: block; }
 
-.welcome-container, .game-setup-container, .ludo-gameplay {
+.welcome-container, .game-setup-container, .ludo-gameplay, .carrom-gameplay {
     background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px);
-    padding: 15px; border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+    padding: 15px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
 }
-
 .welcome-tag { font-size: 1.1rem; color: #e4e4e4; margin-bottom: 15px; }
-.vol-btn {
-    background: #e94560; color: white; border: none; padding: 8px 15px;
-    border-radius: 20px; font-weight: bold; cursor: pointer; margin-bottom: 15px;
-}
-
-.input-group input {
-    width: 85%; padding: 12px; border: none; border-radius: 10px;
-    font-size: 1rem; text-align: center; background: #fff; color: #333;
-}
-
-.btn {
-    width: 90%; padding: 12px; margin: 6px 0; font-size: 1.1rem;
-    font-weight: bold; border: none; border-radius: 12px; cursor: pointer; transition: 0.2s;
-}
+.vol-btn { background: #e94560; color: white; border: none; padding: 8px 15px; border-radius: 20px; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
+.input-group input { width: 85%; padding: 12px; border: none; border-radius: 10px; font-size: 1rem; text-align: center; background: #fff; color: #333; }
+.btn { width: 90%; padding: 12px; margin: 6px 0; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; transition: 0.2s; }
 .btn-ludo { background-color: #ff4757; color: white; }
 .btn-carrom { background-color: #ffa502; color: white; }
 .btn-mode { background-color: #0f4c75; color: white; }
 .btn-back { background-color: #3282b8; color: white; margin-top: 15px; }
-
 .players-section { margin-top: 15px; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 12px; display: none; }
 .player-options { display: flex; justify-content: space-around; gap: 10px; }
 .btn-player { flex: 1; padding: 12px 5px; font-weight: bold; background: #00b894; color: white; border: none; border-radius: 8px; cursor: pointer; }
 
-/* 15x15 LUDO BOARD GRID */
+/* LUDO BOARD GRID */
 .gameplay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-#ludo-turn-indicator { font-size: 1.1rem; font-weight: bold; background: #222; padding: 5px 15px; border-radius: 10px; }
+#ludo-turn-indicator, #carrom-turn-indicator { font-size: 1.1rem; font-weight: bold; background: #222; padding: 5px 15px; border-radius: 10px; }
 .btn-exit { background: #ff4757; color: white; border: none; padding: 5px 15px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-
-.ludo-board-grid {
-    width: 340px; height: 340px; background: #fff; margin: 0 auto;
-    display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr);
-    border: 4px solid #222; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-    position: relative;
-}
-
-/* घर और रास्ते के डिब्बे */
+.ludo-board-grid { width: 340px; height: 340px; background: #fff; margin: 0 auto; display: grid; grid-template-columns: repeat(15, 1fr); grid-template-rows: repeat(15, 1fr); border: 4px solid #222; border-radius: 8px; position: relative; }
 .cell { background: #fff; border: 1px solid #ccc; display: flex; justify-content: center; align-items: center; position: relative; }
 .home-box { display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; font-size: 1.1rem; }
-
-/* रंगों की सेटिंग */
 .bg-red { background-color: #ff4757 !important; }
 .bg-green { background-color: #2ed573 !important; }
 .bg-yellow { background-color: #ffa502 !important; }
@@ -64,23 +38,36 @@
 .star-cell { background-color: #dfe4ea !important; }
 .star-cell::after { content: "⭐"; font-size: 0.7rem; }
 
-/* गोटियाँ (Tokens) */
-.token {
-    width: 14px; height: 14px; border-radius: 50%; border: 2px solid #fff;
-    position: absolute; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.4);
-    animation: bounce 0.4s infinite alternate;
-}
-.token-red { background-color: #b30000; }
-.token-green { background-color: #00802b; }
-.token-yellow { background-color: #cc8400; }
-.token-blue { background-color: #005ce6; }
-
-/* पासा (Dice) */
+/* LUDO TOKENS WITH CLICK EFFECTS */
+.token { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #fff; position: absolute; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.4); cursor: pointer; }
+.token-clickable { animation: pulse 0.5s infinite alternate; border: 2px solid gold; width: 18px; height: 18px; }
+@keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
+.token-red { background-color: #ff4757; }
+.token-green { background-color: #2ed573; }
+.token-yellow { background-color: #ffa502; }
+.token-blue { background-color: #1e90ff; }
 .dice-container { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 15px; }
-.dice {
-    width: 45px; height: 45px; background: white; color: black; border-radius: 10px;
-    display: flex; justify-content: center; align-items: center; font-size: 1.6rem; font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); border: 2px solid #ccc;
-}
+.dice { width: 45px; height: 45px; background: white; color: black; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.6rem; font-weight: bold; border: 2px solid #ccc; }
 .btn-roll { background: #ffa502; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; font-weight: bold; border-radius: 10px; cursor: pointer; }
-.btn:active, .btn-player:active, .vol-btn:active, .btn-roll:active { transform: scale(0.96); }
+
+/* 🟤 CARROM BOARD STYLE (WOODEN DESIGN) */
+.carrom-board {
+    width: 340px; height: 340px; background-color: #fddca5; background-image: radial-gradient(#f3cc91 20%, transparent 20%), radial-gradient(#e0b374 20%, transparent 20%); background-size: 10px 10px;
+    margin: 0 auto; border: 12px solid #5c3a21; border-radius: 10px; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.4);
+}
+.pocket { width: 28px; height: 28px; background: #111; border-radius: 50%; position: absolute; box-shadow: inset 0 4px 8px rgba(0,0,0,0.8); }
+.top-left { top: 5px; left: 5px; } .top-right { top: 5px; right: 5px; } .bottom-left { bottom: 5px; left: 5px; } .bottom-right { bottom: 5px; right: 5px; }
+.center-circle { width: 60px; height: 60px; border: 2px solid #5c3a21; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; justify-content: center; align-items: center; }
+
+/* कैरम गोटियाँ */
+.carrom-coin { width: 14px; height: 14px; border-radius: 50%; position: absolute; box-shadow: 0 2px 4px rgba(0,0,0,0.3); border: 1px solid #fff; transition: all 0.3s ease; }
+.coin-white { background: #fff; border: 1px solid #ccc; }
+.coin-black { background: #222; border: 1px solid #000; }
+.queen-coin { width: 14px; height: 14px; background: #ff4757; border-radius: 50%; border: 1px solid #fff; }
+
+/* स्ट्राइकर */
+.striker { width: 22px; height: 22px; background: #1e90ff; border: 2px solid #fff; border-radius: 50%; position: absolute; bottom: 35px; left: 159px; box-shadow: 0 4px 6px rgba(0,0,0,0.4); transition: left 0.1s ease, bottom 0.4s ease; }
+.carrom-controls { margin-top: 15px; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 10px; }
+.carrom-controls input { width: 70%; margin: 10px 0; }
+.btn-shoot { background: #2ed573; color: white; border: none; padding: 8px 20px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+.btn:active, .btn-roll:active, .btn-shoot:active { transform: scale(0.96); }

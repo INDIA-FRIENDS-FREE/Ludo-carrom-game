@@ -13,12 +13,10 @@
         <div class="welcome-container">
             <h1>Welcome to the Game! 🎮</h1>
             <p>लूडो और कैरम की दुनिया में आपका स्वागत है</p>
-            
             <div class="input-group">
                 <label for="username">अपना सुंदर सा नाम लिखिए:</label>
                 <input type="text" id="username" placeholder="यहाँ नाम डालें (जैसे: Rahul)...">
             </div>
-
             <div class="game-choice">
                 <h3>आप क्या खेलना चाहते हैं?</h3>
                 <button class="btn btn-ludo" onclick="goToLudoPage()">🎲 लूडो (Ludo)</button>
@@ -29,19 +27,15 @@
 
     <!-- PAGE 2: LUDO SCREEN -->
     <div id="page-2" class="page">
-        <!-- सेटअप स्क्रीन -->
         <div id="ludo-setup" class="game-setup-container">
             <h2>🎲 Ludo Game Setup</h2>
             <p id="ludo-welcome-msg" class="welcome-tag"></p>
-            
             <button id="ludo-vol-btn" class="vol-btn" onclick="toggleVolume('ludo')">🔊 Volume: ON</button>
-
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectLudoMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectLudoMode('friends')">👥 Play with Friends</button>
             </div>
-
             <div id="ludo-players-section" class="players-section">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
@@ -50,54 +44,69 @@
                     <button class="btn-player" onclick="startLudoGameplay(4)">4 Players</button>
                 </div>
             </div>
-
             <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
         </div>
 
-        <!-- असली लूडो गेमप्ले स्क्रीन -->
         <div id="ludo-gameplay" class="ludo-gameplay" style="display: none;">
             <div class="gameplay-header">
                 <span id="ludo-turn-indicator">🔴 Red Turn</span>
                 <button class="btn-exit" onclick="exitLudoGameplay()">❌ Exit</button>
             </div>
-            
-            <!-- 15x15 असली लूडो ग्रिड बोर्ड -->
-            <div class="ludo-board-grid" id="ludo-board">
-                <!-- JavaScript के ज़रिए 52 रास्ते के खाने और 4 घर अपने आप यहाँ बन जाएंगे -->
-            </div>
-
-            <!-- पासा (Dice) फेंकने का एरिया -->
+            <div class="ludo-board-grid" id="ludo-board"></div>
             <div class="dice-container">
                 <div id="ludo-dice" class="dice">1</div>
-                <button class="btn-roll" onclick="rollLudoDice()">🎲 Roll Dice</button>
+                <button id="roll-btn" class="btn-roll" onclick="rollLudoDice()">🎲 Roll Dice</button>
             </div>
         </div>
     </div>
 
     <!-- PAGE 3: CARROM SCREEN -->
     <div id="page-3" class="page">
-        <div class="game-setup-container">
+        <div id="carrom-setup" class="game-setup-container">
             <h2>⚪ Carrom Game Setup</h2>
             <p id="carrom-welcome-msg" class="welcome-tag"></p>
-            
             <button id="carrom-vol-btn" class="vol-btn" onclick="toggleVolume('carrom')">🔊 Volume: ON</button>
-
             <div class="mode-selection">
                 <h3>खेलने का तरीका चुनें:</h3>
                 <button class="btn btn-mode" onclick="selectCarromMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectCarromMode('friends')">👥 Play with Friends</button>
             </div>
-
             <div id="carrom-players-section" class="players-section">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
-                    <button class="btn-player" onclick="setPlayers('carrom', 2)">2 Players</button>
-                    <button class="btn-player" onclick="setPlayers('carrom', 3)">3 Players</button>
-                    <button class="btn-player" onclick="setPlayers('carrom', 4)">4 Players</button>
+                    <button class="btn-player" onclick="startCarromGameplay(2)">2 Players</button>
+                    <button class="btn-player" onclick="startCarromGameplay(3)">3 Players</button>
+                    <button class="btn-player" onclick="startCarromGameplay(4)">4 Players</button>
                 </div>
             </div>
-
             <button class="btn btn-back" onclick="backToHome()">⬅️ पीछे जाएँ</button>
+        </div>
+
+        <!-- असली कैरम गेमप्ले स्क्रीन -->
+        <div id="carrom-gameplay" class="carrom-gameplay" style="display: none;">
+            <div class="gameplay-header">
+                <span id="carrom-turn-indicator">⚪ White Turn</span>
+                <button class="btn-exit" onclick="exitCarromGameplay()">❌ Exit</button>
+            </div>
+            
+            <!-- लकड़ी जैसा दिखने वाला असली कैरम बोर्ड -->
+            <div class="carrom-board" id="carrom-board">
+                <div class="pocket top-left"></div>
+                <div class="pocket top-right"></div>
+                <div class="pocket bottom-left"></div>
+                <div class="pocket bottom-right"></div>
+                <div class="center-circle">
+                    <div class="queen-coin"></div>
+                </div>
+                <!-- गोटियाँ और स्ट्राइकर कोड से अंदर आ जाएंगे -->
+            </div>
+
+            <!-- स्ट्राइकर को कंट्रोल करने का स्लाइडर बार -->
+            <div class="carrom-controls">
+                <label for="striker-range">स्ट्राइकर खिसकाएं:</label>
+                <input type="range" id="striker-range" min="50" max="290" value="170" oninput="moveStriker(this.value)">
+                <button class="btn-shoot" onclick="shootStriker()">🎯 HIT</button>
+            </div>
         </div>
     </div>
 
