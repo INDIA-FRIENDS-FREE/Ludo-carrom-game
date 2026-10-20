@@ -36,7 +36,7 @@
                 <button class="btn btn-mode" onclick="selectLudoMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectLudoMode('friends')">👥 Play with Friends</button>
             </div>
-            <div id="ludo-players-section" class="players-section">
+            <div id="ludo-players-section" class="players-section" style="display: none;">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
                     <button class="btn-player" onclick="startLudoGameplay(2)">2 Players</button>
@@ -71,7 +71,7 @@
                 <button class="btn btn-mode" onclick="selectCarromMode('computer')">🤖 Computer vs Me</button>
                 <button class="btn btn-mode" onclick="selectCarromMode('friends')">👥 Play with Friends</button>
             </div>
-            <div id="carrom-players-section" class="players-section">
+            <div id="carrom-players-section" class="players-section" style="display: none;">
                 <h3>कितने लोग खेलेंगे?</h3>
                 <div class="player-options">
                     <button class="btn-player" onclick="startCarromGameplay(2)">2 Players</button>
@@ -104,6 +104,87 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        let ludoTurns = ["🔴 Red Turn", "🟢 Green Turn", "🟡 Yellow Turn", "🔵 Blue Turn"];
+        let ludoColors = ["red", "green", "yellow", "blue"];
+        let currentTurnIndex = 0; 
+        let totalActivePlayers = 2;
+        let hasRolled = false;
+        let tokenPositions = { red: 0, green: 0 };
+
+        function goToLudoPage() {
+            let name = document.getElementById("username").value || "खिलाड़ी";
+            document.getElementById("page-1").classList.remove("active");
+            document.getElementById("page-2").classList.add("active");
+            document.getElementById("ludo-welcome-msg").innerText = "चलो खेलते हैं, " + name + "!";
+            document.getElementById("ludo-setup").style.display = "block";
+            document.getElementById("ludo-gameplay").style.display = "none";
+            document.getElementById("ludo-players-section").style.display = "none";
+        }
+
+        function goToCarromPage() {
+            let name = document.getElementById("username").value || "खिलाड़ी";
+            document.getElementById("page-1").classList.remove("active");
+            document.getElementById("page-3").classList.add("active");
+            document.getElementById("carrom-welcome-msg").innerText = "चलो खेलते हैं, " + name + "!";
+            document.getElementById("carrom-setup").style.display = "block";
+            document.getElementById("carrom-gameplay").style.display = "none";
+            document.getElementById("carrom-players-section").style.display = "none";
+        }
+
+        function backToHome() {
+            document.getElementById("page-2").classList.remove("active");
+            document.getElementById("page-3").classList.remove("active");
+            document.getElementById("page-1").classList.add("active");
+        }
+
+        function selectLudoMode(mode) {
+            if(mode === 'friends') {
+                document.getElementById("ludo-players-section").style.display = "block";
+            } else { 
+                alert("🤖 कंप्यूटर मोड चुना गया!");
+                startLudoGameplay(2); 
+            }
+        }
+
+        function selectCarromMode(mode) {
+            if(mode === 'friends') {
+                document.getElementById("carrom-players-section").style.display = "block";
+            } else { 
+                alert("🤖 कंप्यूटर मोड चुना गया!");
+                startCarromGameplay(2);
+            }
+        }
+
+        function generateLudoBoard() {
+            const board = document.getElementById("ludo-board"); 
+            board.innerHTML = "";
+            for (let r = 0; r < 15; r++) {
+                for (let c = 0; c < 15; c++) {
+                    if (r < 6 && c < 6) { if (r === 0 && c === 0) board.innerHTML += '<div class="home-box bg-red" style="grid-area: 1/1/7/7">RED</div>'; continue; }
+                    if (r < 6 && c > 8) { if (r === 0 && c === 9) board.innerHTML += '<div class="home-box bg-green" style="grid-area: 1/10/7/16">GREEN</div>'; continue; }
+                    if (r > 8 && c < 6) { if (r === 9 && c === 0) board.innerHTML += '<div class="home-box bg-blue" style="grid-area: 10/1/16/7">BLUE</div>'; continue; }
+                    if (r > 8 && c > 8) { if (r === 9 && c === 9) board.innerHTML += '<div class="home-box bg-yellow" style="grid-area: 10/10/16/16">YELLOW</div>'; continue; }
+                    if (r >= 6 && r <= 8 && c >= 6 && c <= 8) { if (r === 6 && c === 6) board.innerHTML += '<div class="home-box bg-center" style="grid-area: 7/7/10/10">HOME</div>'; continue; }
+
+                    let cell = document.createElement("div"); 
+                    cell.className = "cell"; 
+                    cell.id = `cell-${r}-${c}`;
+                    
+                    if (r === 6 && c === 1) cell.classList.add("bg-red");
+                    if (r === 1 && c === 8) cell.classList.add("bg-green");
+                    if (r === 8 && c === 13) cell.classList.add("bg-yellow");
+                    if (r === 13 && c === 6) cell.classList.add("bg-blue");
+                    if (r === 7 && c >= 1 && c <= 5) cell.classList.add("bg-red");
+                    if (c === 7 && r >= 1 && r <= 5) cell.classList.add("bg-green");
+                    if (r === 7 && c >= 9 && c <= 13) cell.classList.add("bg-yellow");
+                    if (c === 7 && r >= 9 && r <= 13) cell.classList.add("bg-blue");
+                    board.appendChild(cell);
+                }
+            }
+            renderTokens();
+        }
+
+        function renderTokens() {
+            document.querySelectorAll('.token').forEach(t => t.remove());
+            
